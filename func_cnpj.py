@@ -2,12 +2,12 @@ import re
 from random import randint
 
 
-def remove_carac(cnpj):
+def remove_caracteres(cnpj):
     return re.sub(r'[^0-9]', '', cnpj)
 
 
-def itera(cnpj):
-    novo_cnpj = remove_carac(cnpj[:-2])
+def gerador_digitos(cnpj):
+    novo_cnpj = remove_caracteres(cnpj[:-2])
     while len(novo_cnpj) != 14:
         mult = 5
         if len(novo_cnpj) == 13:
@@ -32,7 +32,7 @@ def digito(soma):
 
 
 def result(cnpj, novo_cnpj):
-    cnpj = remove_carac(cnpj)
+    cnpj = remove_caracteres(cnpj)
     sequencia = novo_cnpj == str(novo_cnpj[0]) * len(cnpj)
     if cnpj == novo_cnpj and not sequencia:
         print('O CNPJ é válido')
@@ -40,7 +40,7 @@ def result(cnpj, novo_cnpj):
         print('O CNPJ é inválido')
 
 
-def gera():
+def gerar_cnpj():
     primeiro_digito = randint(0, 9)
     segundo_digito = randint(0, 9)
     segundo_bloco = randint(100, 999)
@@ -50,10 +50,7 @@ def gera():
     inicio_cnpj = f'{primeiro_digito}{segundo_digito}{segundo_bloco}' \
                   f'{terceiro_bloco}{quarto_bloco}00'
 
-    novo_cnpj = remove_carac(inicio_cnpj[:-2])
-
-    while len(novo_cnpj) != 14:
-        novo_cnpj = itera(novo_cnpj)
+    novo_cnpj = gerador_digitos(inicio_cnpj)
 
     print(f'O CNPJ gerado é: {novo_cnpj[:2]}.{novo_cnpj[2:5]}.{novo_cnpj[5:8]}/'
           f'{novo_cnpj[8:12]}-{novo_cnpj[12:14]}')
