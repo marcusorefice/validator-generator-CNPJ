@@ -1,1 +1,1 @@
-# validator-generator-CNPJ
+# CNPJ-generator-validator
